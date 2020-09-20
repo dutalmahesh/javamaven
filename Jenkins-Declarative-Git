@@ -2,12 +2,19 @@ currentBuild.displayName = "online-shopping-#"+currentBuild.number
 
 pipeline{
     agent any
-    
+    environment{
+    PATH = "$PATH:/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven3.6/bin"
+    }
     stages{
         stage("Git Checkout"){
             steps{
                 git 'https://github.com/dutalmahesh/javamaven'
             }
           }
+        stage("maven build"){
+            steps{
+             sh "mvn clean package"
+             }
+       }  
     }
 }
